@@ -6,17 +6,11 @@ services: #los contenedores que vamos a usar
     restart: always
     build: .
     ports:
-      - published: 5000
-        target: 3000
-    links:
-      - mongo
+      - 5000:3000
     volumes:
       - .:/usr/src/app
   mongo:
     container_name: mongodatabase
-    image: mongo
-    logging:
-      driver: none
+    image: mongo:5.0
     ports:
-      - published: 27017
-        target: 27017
+      - 27017:27017
