@@ -23,12 +23,20 @@ async function getData(req, res) {
 
 	try {
 		const { deviceId, startDate, finalDate } = req.body;
-		const endDate =
-			finalDate == ''
-				? new Date(`${startDate}T23:59:59.000Z`)
-				: new Date(`${finalDate}T23:59:59.000Z`);
-		const initDate = new Date(`${startDate}T00:00:00.000Z`);
-		//console.log('START', initDate, ' FINAL', endDate);
+		const initDate = new Date(`${startDate}T05:00:00.000Z`);
+		let endDate;
+
+		if (finalDate == '') {
+			endDate = new Date(initDate);
+			endDate.setDate(endDate.getDate() + 1);
+
+			console.log();
+		} else {
+			endDate = new Date(`${finalDate}T05:00:00.000Z`);
+			endDate.setDate(endDate.getDate() + 1);
+		}
+
+		console.log('START', initDate, ' FINAL', endDate);
 
 		const diffTime = Math.abs(endDate - initDate);
 		const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -41,7 +49,7 @@ async function getData(req, res) {
 			const data = await Sensor.find({
 				timestamp: {
 					$gte: initDate,
-					$lt: endDate,
+					$lte: endDate,
 				},
 			});
 
@@ -52,7 +60,7 @@ async function getData(req, res) {
 					{
 						timestamp: {
 							$gte: initDate,
-							$lt: endDate,
+							$lte: endDate,
 						},
 					},
 					{ deviceId: deviceId },
