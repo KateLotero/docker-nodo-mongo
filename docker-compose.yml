@@ -8,7 +8,7 @@ services: #los contenedores que vamos a usar
     ports:
       - 5000:3000
     volumes:
-      - .:/usr/src/app
+      - .:/app
   mongo:
     container_name: mongodatabase
     image: mongo:5.0

@@ -22,7 +22,9 @@ async function getData(req, res) {
 	// FALTA obligatorio startDate?
 
 	try {
-		const { deviceId, startDate, finalDate } = req.body;
+		const deviceId = req.query.sensor ? req.query.sensor : '';
+		const startDate = req.query.fecha1;
+		const finalDate = req.query.fecha2 ? req.query.fecha2 : '';
 		const initDate = new Date(`${startDate}T05:00:00.000Z`);
 		let endDate;
 

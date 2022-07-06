@@ -1,5 +1,5 @@
 FROM node:16-alpine
-
+# -p crea la carpeta si no existe
 RUN mkdir -p /app
 
 WORKDIR /app
