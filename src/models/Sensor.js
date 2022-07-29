@@ -75,7 +75,7 @@ const sensorSchema = new Schema(
 		},
 	},
 	{
-		collection: 'DAGMA2',
+		collection: 'DAGMA',
 		timestamps: false,
 		versionKey: false,
 	}
